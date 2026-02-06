@@ -209,26 +209,66 @@ export const steps = [
       
       <div class="bg-cyan-950/30 p-4 rounded-lg border-l-4 border-cyan-500 mb-6">
         <h4 class="text-cyan-400 font-bold mb-2">什麼是 Agent Skill?</h4>
-        <p class="text-gray-300 mb-2">
+        <p class="text-gray-300 mb-4">
           Agent Skill 是一組由專家定義的指令與工具包。它能讓通用的 AI 瞬間變成特定領域的專家。
         </p>
-        <p class="text-gray-300">
-          Agent Skills 涵蓋辦公、設計、研究與工作流自動化，能顯著提升您的生產力。
-        </p>
+
+        <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+           <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> 核心價值 (Why use it ?)
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-cyan-300 font-bold mb-1">💰 成本效益 (Savings)</div>
+             <div class="text-gray-400 text-xs">減少重複輸入背景資料，大幅節省 Token 成本與頻寬。</div>
+           </div>
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-fuchsia-300 font-bold mb-1">🎯 品質一致 (Consistency)</div>
+             <div class="text-gray-400 text-xs">確保全公司輸出的代碼與文件風格統一，不因人而異。</div>
+           </div>
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-yellow-300 font-bold mb-1">⚡️ 人力賦能 (Empowerment)</div>
+             <div class="text-gray-400 text-xs">讓資淺員工也能透過 Skill，瞬間擁有資深專家的 AI 操控力。</div>
+           </div>
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-green-300 font-bold mb-1">🛡️ 風險合規 (Compliance)</div>
+             <div class="text-gray-400 text-xs">透過 Skill 預設的限制，防止 AI 產生危險或不合規的內容。</div>
+           </div>
+        </div>
       </div>
+
       `,
       en: `
       <p class="mb-4 text-xl">Your AI Agent now has infinite potential.</p>
       
       <div class="bg-cyan-950/30 p-4 rounded-lg border-l-4 border-cyan-500 mb-6">
         <h4 class="text-cyan-400 font-bold mb-2">What is an Agent Skill?</h4>
-        <p class="text-gray-300 mb-2">
+        <p class="text-gray-300 mb-4">
           An Agent Skill is a set of expert-defined instructions and tools. It instantly transforms a generic AI into a domain expert.
         </p>
-        <p class="text-gray-300">
-          Agent Skills cover Office, Design, Research, and Workflow Automation, significantly boosting your productivity.
-        </p>
+
+        <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+           <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Core Benefits
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-cyan-300 font-bold mb-1">💰 Cost Savings</div>
+             <div class="text-gray-400 text-xs">Reduces repetitive context input, saving tokens and bandwidth.</div>
+           </div>
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-fuchsia-300 font-bold mb-1">🎯 Consistency</div>
+             <div class="text-gray-400 text-xs">Ensures unified output style across the company, regardless of user.</div>
+           </div>
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-yellow-300 font-bold mb-1">⚡️ Empowerment</div>
+             <div class="text-gray-400 text-xs">Enables junior staff to wield expert-level AI capabilities instantly.</div>
+           </div>
+           <div class="bg-black/20 p-2 rounded border border-white/5">
+             <div class="text-green-300 font-bold mb-1">🛡️ Compliance & Safety</div>
+             <div class="text-gray-400 text-xs">Pre-set constraints prevent AI from generating risky or non-compliant content.</div>
+           </div>
+        </div>
       </div>
+
       `
     },
     proTip: {

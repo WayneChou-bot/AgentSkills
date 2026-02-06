@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as Icons from 'lucide-react'; // Dynamic import for icons
 import TypewriterText from './TypewriterText';
+import TerminalDemo from './TerminalDemo';
 
 const StepCard = ({ step, direction, lang, onCopy }) => {
+    const [activeDemoSkill, setActiveDemoSkill] = useState(null);
+
     const handleContentClick = (e) => {
         // Check if the clicked element or parent has 'copy-trigger' class
         const target = e.target.closest('.copy-trigger');
@@ -15,7 +18,13 @@ const StepCard = ({ step, direction, lang, onCopy }) => {
         }
     };
 
-    const IconComponent = Icons[step.icon] || Icons.HelpCircle;
+    const toggleDemo = (skill) => {
+        if (activeDemoSkill?.name === skill.name) {
+            setActiveDemoSkill(null); // Toggle off
+        } else {
+            setActiveDemoSkill(skill); // Toggle on
+        }
+    };
 
     const variants = {
         enter: (direction) => ({
@@ -96,30 +105,39 @@ const StepCard = ({ step, direction, lang, onCopy }) => {
                             {step.skills && (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                                     {step.skills.map((skill, idx) => (
-                                        <div key={idx} className="bg-white/5 border border-white/10 p-3 rounded hover:bg-white/10 transition-colors group">
+                                        <div
+                                            key={idx}
+                                            onClick={() => toggleDemo(skill)}
+                                            className={`bg-white/5 border p-3 rounded transition-all group cursor-pointer relative overflow-hidden ${activeDemoSkill?.name === skill.name
+                                                    ? 'border-cyan-500 bg-cyan-900/20 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                                                    : 'border-white/10 hover:bg-white/10 hover:border-cyan-500/50'
+                                                }`}
+                                        >
+                                            {/* Active Indicator */}
+                                            {activeDemoSkill?.name === skill.name && (
+                                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-cyan-500"></div>
+                                            )}
+
                                             <div className="flex items-center gap-2 mb-1">
-                                                <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors bg-cyan-950/50 p-1.5 rounded">
+                                                <span className={`transition-colors p-1.5 rounded ${activeDemoSkill?.name === skill.name
+                                                        ? 'text-cyan-300 bg-cyan-950/50'
+                                                        : 'text-cyan-400 group-hover:text-cyan-300 bg-cyan-950/30'
+                                                    }`}>
                                                     {Icons[skill.icon] ? React.createElement(Icons[skill.icon], { size: 16 }) : <Icons.Box size={16} />}
                                                 </span>
                                                 <span className="font-bold text-white text-sm font-orbitron tracking-wide">{skill.name}</span>
+
+                                                {/* Click hint */}
+                                                <span className="ml-auto text-[10px] text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    {activeDemoSkill?.name === skill.name ? 'DEMO RUNNING' : 'CLICK FOR DEMO'}
+                                                </span>
                                             </div>
                                             <p className="text-xs text-gray-400 leading-relaxed pl-1 mb-2">
                                                 {typeof skill.desc === 'object' ? skill.desc[lang] : skill.desc}
                                             </p>
 
-                                            {/* Skill Meta Tags */}
                                             <div className="flex gap-2 pl-1">
-                                                <span className={`text - [10px] px - 1.5 py - 0.5 rounded border ${skill.type === 'Cloud'
-                                                    ? 'bg-fuchsia-900/30 text-fuchsia-300 border-fuchsia-500/20'
-                                                    : 'bg-green-900/30 text-green-300 border-green-500/20'
-                                                    } `}>
-                                                    {skill.type}
-                                                </span>
-                                                {skill.reqs && skill.reqs !== '無' && (
-                                                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-gray-400 border border-white/10 uppercase">
-                                                        Req: {skill.reqs}
-                                                    </span>
-                                                )}
+                                                {/* Meta tags removed as per request */}
                                             </div>
                                         </div>
                                     ))}
@@ -141,46 +159,66 @@ const StepCard = ({ step, direction, lang, onCopy }) => {
 
                         </div>
 
-                        {/* Right Visual Panel - Dynamic Tech Graphic */}
-                        <div className="flex-1 bg-black/40 rounded-xl m-2 overflow-hidden relative group flex items-center justify-center">
-                            {/* Animated Background Grid */}
-                            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_1px] pointer-events-none z-20"></div>
-                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-black to-fuchsia-900/20 z-0"></div>
+                        {/* Right Visual Panel - Dynamic Tech Graphic or Terminal Demo */}
+                        <div className="flex-1 bg-black/40 rounded-xl m-2 overflow-hidden relative group flex items-center justify-center border border-white/5">
 
-                            {/* Rotating Ring */}
-                            <div className="absolute w-64 h-64 rounded-full border border-cyan-500/20 animate-[spin_10s_linear_infinite]"></div>
-                            <div className="absolute w-48 h-48 rounded-full border border-fuchsia-500/20 animate-[spin_15s_linear_infinite_reverse]"></div>
-
-                            {/* Central Icon */}
-                            <div className="relative z-10 flex flex-col items-center gap-4">
+                            {activeDemoSkill ? (
+                                // Render Terminal Demo
                                 <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                    className="w-24 h-24 rounded-2xl bg-black/50 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] relative overflow-hidden group-hover:scale-105 transition-transform"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="w-full h-full p-2"
                                 >
-                                    <div className="absolute inset-0 bg-cyan-500/10 animate-pulse"></div>
-                                    {step.icon && Icons[step.icon]
-                                        ? React.createElement(Icons[step.icon], { size: 48, className: "text-cyan-400 relative z-10" })
-                                        : <Icons.Activity size={48} className="text-cyan-400 relative z-10" />
-                                    }
+                                    <TerminalDemo skill={activeDemoSkill} lang={lang} />
                                 </motion.div>
+                            ) : (
+                                // Default Graphics
+                                <>
+                                    {/* Animated Background Grid */}
+                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_1px] pointer-events-none z-20"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-black to-fuchsia-900/20 z-0"></div>
 
-                                <motion.div
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.4 }}
-                                    className="text-center"
-                                >
-                                    <h3 className="text-cyan-300 font-orbitron font-bold tracking-widest text-sm uppercase mb-1">
-                                        {step.title[lang].split(' ')[0]} {/* Simple truncated title */}
-                                    </h3>
-                                    <div className="flex items-center justify-center gap-2 text-[10px] text-fuchsia-400 font-mono">
-                                        <span className="w-1.5 h-1.5 bg-fuchsia-500 rounded-full animate-blink"></span>
-                                        STATUS: ACTIVE
+                                    {/* Rotating Ring */}
+                                    <div className="absolute w-64 h-64 rounded-full border border-cyan-500/20 animate-[spin_10s_linear_infinite]"></div>
+                                    <div className="absolute w-48 h-48 rounded-full border border-fuchsia-500/20 animate-[spin_15s_linear_infinite_reverse]"></div>
+
+                                    {/* Central Icon */}
+                                    <div className="relative z-10 flex flex-col items-center gap-4">
+                                        <motion.div
+                                            initial={{ scale: 0.8, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            transition={{ duration: 0.5, delay: 0.2 }}
+                                            className="w-24 h-24 rounded-2xl bg-black/50 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] relative overflow-hidden group-hover:scale-105 transition-transform"
+                                        >
+                                            <div className="absolute inset-0 bg-cyan-500/10 animate-pulse"></div>
+                                            {step.icon && Icons[step.icon]
+                                                ? React.createElement(Icons[step.icon], { size: 48, className: "text-cyan-400 relative z-10" })
+                                                : <Icons.Activity size={48} className="text-cyan-400 relative z-10" />
+                                            }
+                                        </motion.div>
+
+                                        <motion.div
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ duration: 0.5, delay: 0.4 }}
+                                            className="text-center"
+                                        >
+                                            <h3 className="text-cyan-300 font-orbitron font-bold tracking-widest text-sm uppercase mb-1">
+                                                {step.title[lang].split(' ')[0]} {/* Simple truncated title */}
+                                            </h3>
+                                            <div className="flex items-center justify-center gap-2 text-[10px] text-fuchsia-400 font-mono">
+                                                <span className="w-1.5 h-1.5 bg-fuchsia-500 rounded-full animate-blink"></span>
+                                                STATUS: {step.skills ? 'READY FOR DEMO' : 'ACTIVE'}
+                                            </div>
+                                            {step.skills && (
+                                                <div className="mt-2 text-[10px] text-gray-500 animate-pulse">
+                                                    &lt; Click a skill to simulate &gt;
+                                                </div>
+                                            )}
+                                        </motion.div>
                                     </div>
-                                </motion.div>
-                            </div>
+                                </>
+                            )}
                         </div>
 
                     </div>

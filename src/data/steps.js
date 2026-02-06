@@ -287,28 +287,73 @@ export const steps = [
     content: {
       zh: `
       <p class="mb-4">處理 Office 文件不再需要手動操作。AI 可以幫您創建、編輯與分析。</p>
-      <div class="bg-gray-800/40 p-3 rounded mb-4 text-xs">
-        <div class="flex items-center gap-2 mb-1">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div> 
-          <span class="text-green-300 font-bold">Local (本地運行)</span>: 檔案主要在您本機處理，資料隱私性高。
-        </div>
-      </div>
       `,
       en: `
       <p class="mb-4">No more manual processing of Office docs. AI can help you create, edit, and analyze.</p>
-      <div class="bg-gray-800/40 p-3 rounded mb-4 text-xs">
-        <div class="flex items-center gap-2 mb-1">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div> 
-          <span class="text-green-300 font-bold">Local</span>: Files are processed on your machine for privacy.
-        </div>
-      </div>
       `
     },
     skills: [
-      { name: "docx", desc: { zh: "Word 文件全能處理。撰寫報告、追蹤修訂、格式排版。", en: "Word expert. Reports, track changes, formatting." }, icon: "FileText", type: "Local", reqs: "無" },
-      { name: "xlsx", desc: { zh: "Excel 專家。公式計算、數據分析、圖表製作。", en: "Excel expert. Formulas, analysis, charts." }, icon: "Table", type: "Local", reqs: "無" },
-      { name: "pptx", desc: { zh: "PowerPoint 生成器。自動排版、演講備忘稿。", en: "PowerPoint generator. Automated layouts, notes." }, icon: "Presentation", type: "Local", reqs: "無" },
-      { name: "pdf", desc: { zh: "PDF 工具箱。提取內容、表格辨識、表單填寫。", en: "PDF toolkit. Extract content, tables, forms." }, icon: "FileCode", type: "Local", reqs: "無" },
+      {
+        name: "docx",
+        desc: { zh: "Word 文件全能處理。撰寫報告、追蹤修訂、格式排版。", en: "Word expert. Reports, track changes, formatting." },
+        icon: "FileText",
+        type: "Local",
+        reqs: "無",
+        demoScript: [
+          { type: 'cmd', text: '@docx generate --topic "AI Adoption" --template "Corporate.docx"' },
+          { type: 'log', text: 'Reading template: Corporate.docx...' },
+          { type: 'log', text: 'Analyzing context from implementation_plan.md...' },
+          { type: 'info', text: 'Generating Section 1: Executive Summary...' },
+          { type: 'info', text: 'Generating Section 2: Technical Architecture...' },
+          { type: 'success', text: 'Report generated: AI_Adoption_Proposal.docx (2.4MB)' },
+          { type: 'info', text: 'Opening file for review...' }
+        ]
+      },
+      {
+        name: "xlsx",
+        desc: { zh: "Excel 專家。公式計算、數據分析、圖表製作。", en: "Excel expert. Formulas, analysis, charts." },
+        icon: "Table",
+        type: "Local",
+        reqs: "無",
+        demoScript: [
+          { type: 'cmd', text: '@xlsx analyze --file "Q3_Sales.csv"' },
+          { type: 'log', text: 'Loading dataset: 15,000 rows...' },
+          { type: 'info', text: 'Detecting outliers and missing values...' },
+          { type: 'log', text: 'Calculating pivot tables for Region vs. Revenue...' },
+          { type: 'success', text: 'Analysis complete. 3 charts created.' },
+          { type: 'log', text: 'Exported summary to: Analysis_Report.xlsx' }
+        ]
+      },
+      {
+        name: "pptx",
+        desc: { zh: "PowerPoint 生成器。自動排版、演講備忘稿。", en: "PowerPoint generator. Automated layouts, notes." },
+        icon: "Presentation",
+        type: "Local",
+        reqs: "無",
+        demoScript: [
+          { type: 'cmd', text: '@pptx create --from "AI_Proposal.docx"' },
+          { type: 'log', text: 'Parsing document structure...' },
+          { type: 'info', text: 'Extracted 5 key sections.' },
+          { type: 'log', text: 'Applying design theme: "Cyberpunk"...' },
+          { type: 'info', text: 'Generating speaker notes...' },
+          { type: 'success', text: 'Slide deck created: Presentation_v1.pptx' }
+        ]
+      },
+      {
+        name: "pdf",
+        desc: { zh: "PDF 工具箱。提取內容、表格辨識、表單填寫。", en: "PDF toolkit. Extract content, tables, forms." },
+        icon: "FileCode",
+        type: "Local",
+        reqs: "無",
+        demoScript: [
+          { type: 'cmd', text: '@pdf extract --file "Manual.pdf" --pages 1-10' },
+          { type: 'log', text: 'Initializing OCR engine...' },
+          { type: 'info', text: 'Processing page 1...' },
+          { type: 'info', text: 'Processing page 2...' },
+          { type: 'success', text: 'Text extracted to: content.txt' },
+          { type: 'success', text: 'Tables found: 3 key tables exported to CSV.' }
+        ]
+      },
     ],
     proTip: {
       zh: "試試看：\"幫我分析這個 Excel 報表並生成一個簡短的總結 PPT\"",
@@ -326,36 +371,70 @@ export const steps = [
     content: {
       zh: `
       <p class="mb-4">從網站設計到影片製作，釋放 AI 的創造力。</p>
-      <div class="bg-gray-800/40 p-3 rounded mb-4 text-xs flex flex-wrap gap-4">
-        <div class="flex items-center gap-2">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div> 
-          <span class="text-green-300 font-bold">Local</span>: 依賴本機 Node.js 環境。
-        </div>
-        <div class="flex items-center gap-2">
-           <div class="w-2 h-2 bg-fuchsia-500 rounded-full"></div> 
-           <span class="text-fuchsia-300 font-bold">Cloud</span>: 需連網調用外部生成模型。
-        </div>
-      </div>
       `,
       en: `
       <p class="mb-4">Unleash AI creativity, from web design to video production.</p>
-      <div class="bg-gray-800/40 p-3 rounded mb-4 text-xs flex flex-wrap gap-4">
-        <div class="flex items-center gap-2">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div> 
-          <span class="text-green-300 font-bold">Local</span>: Requires local Node.js.
-        </div>
-        <div class="flex items-center gap-2">
-           <div class="w-2 h-2 bg-fuchsia-500 rounded-full"></div> 
-           <span class="text-fuchsia-300 font-bold">Cloud</span>: Calls external generation models.
-        </div>
-      </div>
       `
     },
     skills: [
-      { name: "frontend-design", desc: { zh: "頂級網頁設計。拒絕 AI 感，打造獨特 UI。", en: "Top-tier web design. Unique UI without the 'AI look'." }, icon: "Palette", type: "Local", reqs: "Node.js" },
-      { name: "imagen", desc: { zh: "AI 圖像生成。UI Mockup、插圖、創意素材。", en: "AI Image Gen. Mockups, illustrations, assets." }, icon: "Image", type: "Cloud", reqs: "Internet" },
-      { name: "remotion", desc: { zh: "程式化影片製作。用 React 寫出動態影像。", en: "Programmatic Video. Create motion graphics with React." }, icon: "Video", type: "Local", reqs: "Node.js, FFmpeg" },
-      { name: "article-illustration", desc: { zh: "文章配圖專家。自動生成插畫。", en: "Article Illustrator. Auto-generated visuals." }, icon: "PenTool", type: "Cloud", reqs: "Internet" }
+      {
+        name: "frontend-design",
+        desc: { zh: "頂級網頁設計。拒絕 AI 感，打造獨特 UI。", en: "Top-tier web design. Unique UI without the 'AI look'." },
+        icon: "Palette",
+        type: "Local",
+        reqs: "Node.js",
+        demoScript: [
+          { type: 'cmd', text: '@frontend design --prompt "Cyberpunk Login Page"' },
+          { type: 'log', text: 'Generating color palette from keywords: Neon, Dark, Glitch...' },
+          { type: 'info', text: 'Drafting layout structure (React + Tailwind)...' },
+          { type: 'log', text: 'Injecting Framer Motion animations...' },
+          { type: 'success', text: 'Component created: src/components/LoginPage.jsx' },
+          { type: 'info', text: 'Preview server started on port 3000.' }
+        ]
+      },
+      {
+        name: "imagen",
+        desc: { zh: "AI 圖像生成。UI Mockup、插圖、創意素材。", en: "AI Image Gen. Mockups, illustrations, assets." },
+        icon: "Image",
+        type: "Cloud",
+        reqs: "Internet",
+        demoScript: [
+          { type: 'cmd', text: '@imagen generate --prompt "Futuristic server room"' },
+          { type: 'log', text: 'Optimizing prompt with styles...' },
+          { type: 'info', text: 'Sending request to generation model...' },
+          { type: 'log', text: 'Processing (25%)...' },
+          { type: 'log', text: 'Processing (100%)...' },
+          { type: 'success', text: 'Image generated: server_room_v1.png' }
+        ]
+      },
+      {
+        name: "remotion",
+        desc: { zh: "程式化影片製作。用 React 寫出動態影像。", en: "Programmatic Video. Create motion graphics with React." },
+        icon: "Video",
+        type: "Local",
+        reqs: "Node.js, FFmpeg",
+        demoScript: [
+          { type: 'cmd', text: 'npm run render video.tsx' },
+          { type: 'log', text: 'Bundling video assets...' },
+          { type: 'info', text: 'Rendering frame 1 of 300...' },
+          { type: 'info', text: 'Rendering frame 150 of 300...' },
+          { type: 'success', text: 'Render complete: out/video.mp4' }
+        ]
+      },
+      {
+        name: "article-illustration",
+        desc: { zh: "文章配圖專家。自動生成插畫。", en: "Article Illustrator. Auto-generated visuals." },
+        icon: "PenTool",
+        type: "Cloud",
+        reqs: "Internet",
+        demoScript: [
+          { type: 'cmd', text: '@illustrate --file "blog_post.md"' },
+          { type: 'log', text: 'Reading article content...' },
+          { type: 'info', text: 'Identified 3 key themes for illustration.' },
+          { type: 'success', text: 'Generated 3 images in /assets folder.' },
+          { type: 'log', text: 'Updated blog_post.md with image links.' }
+        ]
+      }
     ],
     proTip: {
       zh: "設計網站時，可以說 \"用 frontend-design 幫我做一個 Cyberpunk 風格的登入頁\"。",
@@ -373,27 +452,54 @@ export const steps = [
     content: {
       zh: `
       <p class="mb-4">將龐大的資訊轉化為易懂的知識與網站。</p>
-      <div class="bg-gray-800/40 p-3 rounded mb-4 text-xs">
-        <div class="flex items-center gap-2 mb-1">
-           <div class="w-2 h-2 bg-fuchsia-500 rounded-full"></div> 
-           <span class="text-fuchsia-300 font-bold">Cloud</span>: NotebookLM 需要 Google 帳戶權限。
-        </div>
-      </div>
       `,
       en: `
       <p class="mb-4">Transform massive information into accessible knowledge and websites.</p>
-      <div class="bg-gray-800/40 p-3 rounded mb-4 text-xs">
-        <div class="flex items-center gap-2 mb-1">
-           <div class="w-2 h-2 bg-fuchsia-500 rounded-full"></div> 
-           <span class="text-fuchsia-300 font-bold">Cloud</span>: NotebookLM requires Google Account access.
-        </div>
-      </div>
       `
     },
     skills: [
-      { name: "notebooklm", desc: { zh: "基於您的筆記與文件回答問題，零幻覺。", en: "Grounded answers from your notes/docs. Zero hallucinations." }, icon: "Brain", type: "Cloud", reqs: "Google Account" },
-      { name: "knowledge-2-web", desc: { zh: "知識轉網頁。將文章變成互動式學習網站。", en: "Knowledge to Web. Turn articles into interactive sites." }, icon: "Globe", type: "Local", reqs: "Node.js" },
-      { name: "paper-2-web", desc: { zh: "學術論文轉推廣頁。製作海報與介紹影片。", en: "Paper to Web. Promos, posters, and videos from papers." }, icon: "BookOpen", type: "Local", reqs: "Node.js" }
+      {
+        name: "notebooklm",
+        desc: { zh: "基於您的筆記與文件回答問題，零幻覺。", en: "Grounded answers from your notes/docs. Zero hallucinations." },
+        icon: "Brain",
+        type: "Cloud",
+        reqs: "Google Account",
+        demoScript: [
+          { type: 'cmd', text: '@notebook query --source "meeting_notes.pdf" --q "Summarize key decisions"' },
+          { type: 'log', text: 'Indexing document: meeting_notes.pdf...' },
+          { type: 'info', text: 'Retrieving relevant chunks...' },
+          { type: 'success', text: 'Answer generated based on page 3 and 5.' },
+          { type: 'info', text: 'Output: "The team decided to adopt React for the frontend..."' }
+        ]
+      },
+      {
+        name: "knowledge-2-web",
+        desc: { zh: "知識轉網頁。將文章變成互動式學習網站。", en: "Knowledge to Web. Turn articles into interactive sites." },
+        icon: "Globe",
+        type: "Local",
+        reqs: "Node.js",
+        demoScript: [
+          { type: 'cmd', text: '@k2w build --topic "Quantum Physics" --style "interactive"' },
+          { type: 'log', text: 'Researching topic on verified sources...' },
+          { type: 'info', text: 'Drafting content structure...' },
+          { type: 'log', text: 'Generating interactive diagrams...' },
+          { type: 'success', text: 'Site generated: /dist/quantum-physics/index.html' }
+        ]
+      },
+      {
+        name: "paper-2-web",
+        desc: { zh: "學術論文轉推廣頁。製作海報與介紹影片。", en: "Paper to Web. Promos, posters, and videos from papers." },
+        icon: "BookOpen",
+        type: "Local",
+        reqs: "Node.js",
+        demoScript: [
+          { type: 'cmd', text: '@p2w convert --file "research_paper.pdf" --output "web"' },
+          { type: 'log', text: 'Parsing LaTeX/PDF content...' },
+          { type: 'info', text: 'Extracting figures and captions...' },
+          { type: 'log', text: 'Simplifying technical jargon for general audience...' },
+          { type: 'success', text: 'Promotional site ready at localhost:8080' }
+        ]
+      }
     ],
     proTip: {
       zh: "丟給 AI 一篇論文 PDF，然後說 \"用 paper-2-web 幫我做一個介紹網站\"。",
@@ -417,8 +523,34 @@ export const steps = [
       `
     },
     skills: [
-      { name: "planning-with-files", desc: { zh: "大型任務規劃。自動建立 task.md 追蹤進度。", en: "Complex Planning. Tracks progress with task.md." }, icon: "Workflow", type: "Local", reqs: "無" },
-      { name: "skill-creator", desc: { zh: "技能製造機。引導你將自己的 SOP 變成 AI Skill。", en: "Skill Creator. Turn your SOPs into AI Skills." }, icon: "Wrench", type: "Local", reqs: "無" }
+      {
+        name: "planning-with-files",
+        desc: { zh: "大型任務規劃。自動建立 task.md 追蹤進度。", en: "Complex Planning. Tracks progress with task.md." },
+        icon: "Workflow",
+        type: "Local",
+        reqs: "無",
+        demoScript: [
+          { type: 'cmd', text: '@plan start --goal "Migrate database to PostgreSQL"' },
+          { type: 'log', text: 'Creating task.md...' },
+          { type: 'info', text: 'Breaking down goal into subtasks...' },
+          { type: 'log', text: 'Created 5 core phases: Assessment, Schema Design, Data Migration, Testing, Cutover.' },
+          { type: 'success', text: 'Plan initialized. Ready to execute Phase 1.' }
+        ]
+      },
+      {
+        name: "skill-creator",
+        desc: { zh: "技能製造機。引導你將自己的 SOP 變成 AI Skill。", en: "Skill Creator. Turn your SOPs into AI Skills." },
+        icon: "Wrench",
+        type: "Local",
+        reqs: "無",
+        demoScript: [
+          { type: 'cmd', text: '@create-skill new --name "deploy-to-azure"' },
+          { type: 'log', text: 'Initiating interactive questionnaire...' },
+          { type: 'info', text: 'Q: What is the primary purpose of this skill?' },
+          { type: 'info', text: 'A: Automate Azure deployment' },
+          { type: 'success', text: 'Template generated: skills/deploy-to-azure/SKILL.md' }
+        ]
+      }
     ],
     proTip: {
       zh: "遇到超複雜任務？先說 \"使用 planning-with-files 幫我規劃一下這個專案\"。",
